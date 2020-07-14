@@ -14,6 +14,8 @@ app.use(express.urlencoded({
 }));
 //Parse incoming JSON data
 app.use(express.json());
+//ALlow server to send css and js files without creating routes for each one
+app.use(express.static('public'));
 
 
 // Find by queryParam
@@ -119,7 +121,15 @@ app.post('/api/animals', (req, res) => {
 });
 //Get route to serve index.html as home page
 app.get('/', (req, res) => {
-    res.sendFile(.path.join(__dirname, './public/index.html'));
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+//Get route to serve animals.html as /animals page
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+//Get route to serve zookeepers.html as /zookeepers page
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
 });
 
 app.listen(PORT, () => {
