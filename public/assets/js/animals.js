@@ -4,7 +4,13 @@ const $displayArea = document.querySelector('#display-area');
 const printResults = resultArr => {
   console.log(resultArr);
 
-  const animalHTML = resultArr.map(({ id, name, personalityTraits, species, diet }) => {
+  const animalHTML = resultArr.map(({
+    id,
+    name,
+    personalityTraits,
+    species,
+    diet
+  }) => {
     return `
   <div class="col-12 col-md-5 mb-3">
     <div class="card p-3" data-id=${id}>
@@ -32,16 +38,16 @@ const getAnimals = (formData = {}) => {
   console.log(queryUrl);
 
   fetch(queryUrl)
-  .then(response => {
-    if (!response.ok) {
-      return alert(`Error: ${response.statusText}`);
-    }
-    return response.json();
-  })
-  .then(animalData => {
-    console.log(animalData);
-    printResults(animalData);
-  });
+    .then(response => {
+      if (!response.ok) {
+        return alert(`Error: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(animalData => {
+      console.log(animalData);
+      printResults(animalData);
+    });
 };
 
 const handleGetAnimalsSubmit = event => {
@@ -68,7 +74,10 @@ const handleGetAnimalsSubmit = event => {
 
   const personalityTraits = personalityTraitArr.join(',');
 
-  const animalObject = { diet, personalityTraits };
+  const animalObject = {
+    diet,
+    personalityTraits
+  };
 
   getAnimals(animalObject);
 };
